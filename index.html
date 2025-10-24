@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Organizador Avanzado</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0b74de">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>🗓 Organizador</h1>
+      <div class="top-controls">
+        <input id="buscar" placeholder="🔎 Buscar actividad..." />
+        <select id="orden">
+          <option value="proximo">Fecha próxima</option>
+          <option value="antiguo">Fecha antigua</option>
+          <option value="alfabetico">Alfabético</option>
+        </select>
+        <button id="toggleTheme" title="Cambiar tema">🌓</button>
+        <button id="installBtn" class="hidden">⬇ Instalar</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- FORMULARIO -->
+      <section class="form-section card">
+        <h2>Añadir / Editar actividad</h2>
+        <form id="formActividad">
+          <input id="actividad" placeholder="Título de la actividad" required />
+          
+          <div class="row">
+            <input type="date" id="fecha" required />
+            <input type="time" id="hora" required />
+          </div>
+
+          <div class="row small-gap">
+            <select id="categoria">
+              <option value="Personal">Personal</option>
+              <option value="Trabajo">Trabajo</option>
+              <option value="Estudio">Estudio</option>
+              <option value="Otro">Otro</option>
+            </select>
+
+            <select id="recurrencia">
+              <option value="none">Sin recurrencia</option>
+              <option value="daily">Diario</option>
+              <option value="weekly">Semanal</option>
+              <option value="monthly">Mensual</option>
+            </select>
+
+            <label class="checkbox">
+              <input type="checkbox" id="notificar" /> Notificar
+            </label>
+
+            <label class="checkbox">
+              <input type="checkbox" id="conSonido" /> Sonido
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="guardarBtn">Agregar</button>
+            <button type="button" id="cancelEdit" class="hidden">Cancelar</button>
+          </div>
+
+          <input type="hidden" id="editingId" value="">
+        </form>
+      </section>
+
+      <!-- LISTA DE ACTIVIDADES -->
+      <section class="list-section card">
+        <div class="list-header">
+          <div class="counters">
+            <span id="totalCount">Total: 0</span>
+            <span id="pendientesCount">Pendientes: 0</span>
+            <span id="completadasCount">Completadas: 0</span>
+          </div>
+          <div class="filters">
+            <select id="filtro">
+              <option value="todas">Todas</option>
+              <option value="pendientes">Pendientes</option>
+              <option value="completadas">Completadas</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 👇 Contenedor con scroll interno -->
+        <div class="scroll-container">
+          <ul id="listaActividades" class="lista"></ul>
+        </div>
+      </section>
+
+      <!-- CALENDARIO -->
+      <section id="calendario" class="calendar card">
+        <h2>📅 Calendario del Mes</h2>
+        <div class="calendar-header">
+          <button id="prevMonth" class="btn-nav">⬅</button>
+          <span id="monthYear"></span>
+          <button id="nextMonth" class="btn-nav">➡</button>
+        </div>
+        <div id="calendarGrid" class="calendar-grid"></div>
+      </section>
+    </main>
+
+    <audio id="alarmaAudio" src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEA..." preload="auto"></audio>
+
+    <footer>
+      <small>Organizador Avanzado • Guardado local • PWA compatible</small>
+    </footer>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
